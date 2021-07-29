@@ -1,0 +1,79 @@
+name: Build Docker Images
+
+on: push
+
+jobs:
+  ansible-python2:
+    name: "Ansible Python 2"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - distro: bionic
+            ansible: 2.5.4
+            ansible_git: v2.5.4
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Ansible ${{ matrix.ansible }}
+        uses: docker/build-push-action@v2
+        with:
+          target: ansible
+          push: ${{ github.event_name != 'pull_request' }}
+          file: python2/Dockerfile
+          tags: |
+            hnhs/ansible:py2-${{ matrix.distro }}-latest
+            hnhs/ansible:py2-${{ matrix.distro }}-${{ matrix.ansible }}
+          build-args: |
+            DISTRO=${{ matrix.distro }}
+            ANSIBLE_VERSION=${{ matrix.ansible }}
+            ANSIBLE_GIT_BRANCH=${{ matrix.ansible_git }}
+
+  ansible-python3:
+    name: "Ansible Python 3"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - distro: focal
+            ansible: 2.11.3
+            ansible_git: v2.11.3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Ansible ${{ matrix.ansible }}
+        uses: docker/build-push-action@v2
+        with:
+          target: ansible
+          push: ${{ github.event_name != 'pull_request' }}
+          file: python3/Dockerfile
+          tags: |
+            hnhs/ansible:latest
+            hnhs/ansible:${{ matrix.distro }}-latest
+            hnhs/ansible:${{ matrix.distro }}-${{ matrix.ansible }}
+          build-args: |
+            DISTRO=${{ matrix.distro }}
+            ANSIBLE_VERSION=${{ matrix.ansible }}
+            ANSIBLE_GIT_BRANCH=${{ matrix.ansible_git }}
