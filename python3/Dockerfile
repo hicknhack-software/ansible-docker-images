@@ -29,6 +29,7 @@ RUN \
     python3-setuptools \
     python3-packaging \
     python3-pip \
+    openssh-client \
     sshpass \
   && ln -s /usr/bin/python3 /usr/bin/python \
   && pip install resolvelib==0.5.4 \
