@@ -47,8 +47,8 @@ jobs:
       matrix:
         include:
           - distro: focal
-            ansible: 2.11.3
-            ansible_git: v2.11.3
+            ansible: 2.11.4
+            ansible_git: v2.11.4
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
