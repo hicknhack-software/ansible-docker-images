@@ -2,7 +2,7 @@ ARG DISTRO=bionic
 ARG ANSIBLE_VERSION=2.5.4
 ARG ANSIBLE_GIT_BRANCH=v2.5.4
 ARG ANSIBLE_DIR=/opt/ansible
-ARG ANSIBLE_GIT_REPO=git://github.com/ansible/ansible.git
+ARG ANSIBLE_GIT_REPO=https://github.com/ansible/ansible.git
 
 FROM ubuntu:${DISTRO} AS ansible
 ARG DISTRO

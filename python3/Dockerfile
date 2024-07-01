@@ -2,7 +2,7 @@ ARG DISTRO=focal
 ARG ANSIBLE_VERSION=2.11.3
 ARG ANSIBLE_GIT_BRANCH=v2.11.3
 ARG ANSIBLE_DIR=/opt/ansible
-ARG ANSIBLE_GIT_REPO=git://github.com/ansible/ansible.git
+ARG ANSIBLE_GIT_REPO=https://github.com/ansible/ansible.git
 
 FROM ubuntu:${DISTRO} AS ansible
 ARG DISTRO
@@ -32,6 +32,7 @@ RUN \
     openssh-client \
     sshpass \
   && ln -s /usr/bin/python3 /usr/bin/python \
+  && rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED \
   && pip install resolvelib==0.5.4 \
   && apt-get purge --yes --quiet \
     python3-pip \
