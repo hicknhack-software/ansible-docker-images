@@ -60,6 +60,9 @@ jobs:
             ansible: 2.11.4
             ansible_git: v2.11.4
           - distro: noble
+            ansible: 2.16.8
+            ansible_git: v2.16.8
+          - distro: noble
             ansible: 2.17.1
             ansible_git: v2.17.1
             extra_tags: |
@@ -104,3 +107,4 @@ jobs:
             DISTRO=${{ matrix.distro }}
             ANSIBLE_VERSION=${{ matrix.ansible }}
             ANSIBLE_GIT_BRANCH=${{ matrix.ansible_git }}
+          visibility: public
