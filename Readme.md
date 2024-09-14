@@ -18,7 +18,7 @@ docker run -it --rm --mount src="$(pwd)",target=/ansible,type=bind hnhs/ansible:
 
 Latest Python3 based Ansible versions:
 ```bash
-docker run -it --rm --mount src="$(pwd)",target=/ansible,type=bind hnhs/ansible:focal-2.11.3
+docker run -it --rm --mount src="$(pwd)",target=/ansible,type=bind hnhs/ansible:focal-2.17.4
 ```
 
 We recommend to mount a volume for the ansible galaxy roles and collections.
@@ -36,5 +36,9 @@ docker build --build-arg ANSIBLE_VERSION=2.5.4 --build-arg ANSIBLE_GIT_BRANCH=v2
 ```
 
 ```bash
-docker build --build-arg ANSIBLE_VERSION=2.11.3 --build-arg ANSIBLE_GIT_BRANCH=v2.11.3 -t ansible:2.11.3 python3
+docker build --build-arg ANSIBLE_VERSION=2.11.4 --build-arg ANSIBLE_GIT_BRANCH=v2.11.4 -t ansible:2.11.4 python3
+```
+
+```bash
+docker build --build-arg DISTRO=noble --build-arg ANSIBLE_VERSION=2.17.4 --build-arg ANSIBLE_GIT_BRANCH=v2.17.4 -t ansible:2.17.4 python3
 ```
